@@ -1,11 +1,16 @@
-const http = require("http");
+const express = require('express')
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "content-type": "text/plain" });
-  res.end("Hello World \n");
-});
+const postRouter=require('./routes/posts.routes')
+const app = express()
 
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+app.get('/',(req,res) => {
+  res.send("Welcome to the home page");
+})
+
+app.use("/api/v1/posts",postRouter)
+
+const PORT =3000
+
+app.listen(PORT,() => {
+  console.log(`Server is running at http://localhost:${PORT}`)
 });
